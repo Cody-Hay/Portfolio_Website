@@ -41,6 +41,98 @@
 								<p>From a technical standpoint, I'm still quite happy with what I did in this project, even if there are a few nitpicks I would change, such as adding a bit more to the enemies' AI, 
 									and how the weapon damage scaling worked. From a game design perspective, I feel that with everything I learnt up until now, I'd make quite a few changes, such as simple things like
 								Having a way to keep track of when you can next fire a shot, and giving the player more or clearer feedback to their actions, whether that be hitting an enemy or building up a lot of speed.</p>
+								<pre>
+									<code>
+
+										    void Update()
+    {
+        //Ground Check
+        IsGrounded = Physics.Raycast(transform.position, Vector3.down, PlayerHeight * 0.5f + 0.2f, WhatIsGround);
+        
+        MyInput();
+
+        //Speedometer
+        CurrentVelocity = rb.linearVelocity.magnitude;
+        roundedVelocity = Mathf.Round(CurrentVelocity);
+        Speedometer.text = roundedVelocity.ToString();
+        SpeedSlider.value = roundedVelocity / 30;
+        DamageMultiplier = roundedVelocity * 0.25f;
+        DamageReduction = roundedVelocity / 5;
+
+        if(roundedVelocity >= 10)
+        {
+            _cameraControls.Highspeed = true;
+            _cameraControls.PeakSpeed = false;
+        }
+        if(roundedVelocity<10)
+        {
+            _cameraControls.Highspeed = false;
+            _cameraControls.PeakSpeed = false;
+        }
+        if (roundedVelocity >= 17)
+        {
+            _cameraControls.Highspeed = false;
+            _cameraControls.PeakSpeed = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    //Input Manager
+    private void MyInput()
+    {
+        HorizontalInput = Input.GetAxisRaw("Horizontal");
+        VerticalInput = Input.GetAxisRaw("Vertical");
+
+        if(Input.GetKeyDown(KeyCode.Space) && IsGrounded)
+        {
+            Jump();
+        }
+        if (Input.GetKey(KeyCode.F))
+        {
+            rb.linearDamping = GroundDrag;
+        }
+        else
+        {
+            rb.linearDamping = 0;
+        }
+    }
+
+    //Movement Behaviour
+    private void MovePlayer()
+    {
+        MoveDirection = Orientation.forward * VerticalInput + Orientation.right * HorizontalInput;
+
+        if(IsGrounded)
+        {
+            //rb.AddForce(MoveDirection.normalized * MoveSpeed * 10f, ForceMode.Force);
+            rb.linearVelocity += MoveDirection * (MoveSpeed * 1.5f * Time.deltaTime);
+        }
+        else if(!IsGrounded)
+        {
+            rb.linearVelocity += MoveDirection * (MoveSpeed * 1.5f * Time.deltaTime);
+        }
+
+        rb.linearVelocity = new Vector3(
+            Mathf.Clamp(rb.linearVelocity.x, (-TopXSpeed), TopXSpeed),
+            Mathf.Clamp(rb.linearVelocity.y,  -TopYSpeed, TopYSpeed),
+            Mathf.Clamp(rb.linearVelocity.z, (-TopZSpeed), TopZSpeed));
+    }
+
+    //Jump Behaviour
+    private void Jump()
+    {
+        rb.linearVelocity = new Vector3 (rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+        rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
+    }
+}
+
+									</code>
+								</pre>
 								<h2>A Keen Eye</h2>
 								<span class="logo"><video controls="" src="images/A Keen Eye Video.mp4" alt=""></span>
 								<p>A keen eye is an isometric/top-down puzzle game where you have to find the odd object out in a sea of them, whilst having intentionally limited controls.
