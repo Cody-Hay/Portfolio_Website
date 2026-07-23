@@ -43,8 +43,75 @@
 								Having a way to keep track of when you can next fire a shot, and giving the player more or clearer feedback to their actions, whether that be hitting an enemy or building up a lot of speed.</p>
 								<pre>
 									<code>
+										public class PlayerMovement : MonoBehaviour
+{
+    [Header("Movement")]
 
-										    void Update()
+    public float MoveSpeed;
+    public float WallRunSpeed;
+    public float GroundDrag;
+    public float TopXSpeed;
+    public float TopYSpeed;
+    public float TopZSpeed;
+
+    public float JumpForce;
+    public float JumpCooldown;
+    public float AirMultiplier;
+
+    private bool Accelerating;
+    float HorizontalInput;
+    float VerticalInput;
+
+    public float DamageMultiplier;
+
+    public float DamageReduction;
+
+    public Transform Orientation;
+
+    Vector3 MoveDirection;
+
+    Rigidbody rb;
+
+    [Header("GroundCheck")]
+
+    //public float PlayerHeight;
+    public Transform FootPos;
+    public float CheckRadius;
+    public LayerMask WhatIsGround;
+    public bool IsGrounded;
+    public float PlayerHeight;
+
+    public CharacterStates currentState;
+
+    [Header("UI Elements")]
+
+    public TMP_Text Speedometer;
+    public Slider SpeedSlider;
+    public float CurrentVelocity;
+
+    public CameraControls _cameraControls;
+
+    public float roundedVelocity;
+
+    public enum CharacterStates
+    {
+        walking,
+        sprinting,
+        wallrunning,
+        crouching,
+        sliding
+    }
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+
+        WallRunSpeed= MoveSpeed;
+    }
+
+   
+    void Update()
     {
         //Ground Check
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, PlayerHeight * 0.5f + 0.2f, WhatIsGround);
@@ -131,6 +198,8 @@
     }
 }
 
+
+	
 									</code>
 								</pre>
 								<h2>A Keen Eye</h2>
