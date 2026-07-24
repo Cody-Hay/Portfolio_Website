@@ -4,6 +4,24 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.video-container {
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  padding-bottom: 56.25%; /* calculate by aspect ratio (h / w * 100%) */
+}
+.video-container .video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 <html>
 	<head>
 		<title>Academic Projects</title>
@@ -30,7 +48,9 @@
 							<section id="content" class="main">
 								
 								<h2>Kineticium</h2>
+								<div class="video-container">
 								<span class="logo"><video controls="" src="images/Kineticium Video.mp4" alt=""></span>
+								</div>
 								<p>Kineticium is a first-person movement shooter where the faster you go, the more damage you deal and the less damage you take.
 								 I made it for my final year project in college in about 4 months in Unity, with my main focus on the mechanics rather than making it look pretty. I did add some minor artistic aspects to it, 
 								such as the cartoon-like outline on the guns and enemies, as well as bullet trails and bullet holes in walls.</p>
@@ -339,7 +359,9 @@ public class EnemyAI : MonoBehaviour
 				</code>
 			</pre>
 								<h2>A Keen Eye</h2>
+			                    <div class="video-container">
 								<span class="logo"><video controls="" src="images/A Keen Eye Video.mp4" alt=""></span>
+								</div>
 								<p>A keen eye is an isometric/top-down puzzle game where you have to find the odd object out in a sea of them, whilst having intentionally limited controls.
 								I made this in 9 weeks during one of the last modules in my 1st year at University, where my main focus was trying to keep the scope as low as I could since this was my first time
 								using Unreal's Blueprints without any assistance. </p>
@@ -358,7 +380,9 @@ public class EnemyAI : MonoBehaviour
 			<Span class="image main"><img src= "images/Object Outline.png" alt ="" /></Span>
 				
 								<h2>Arena Movement Tool</h2>
+			                    <div class="video-container">
 								<span class="logo"><video controls="" src="images/Arena Video True.mp4" alt=""></span>
+								</div>
 								<p>The Arena Movement Tool was a tool I made to assist with creating arena-based movement for bosses, whilst also creating a camera tracking and orbiting system in the process, without realising.
 								I made this in 9 weeks for my Tools Development Module in my 2nd year of University, where I gave myself the challenge of doing everything in C++, with the only semblance of Blueprint
 								usage being the component itself.</p>
