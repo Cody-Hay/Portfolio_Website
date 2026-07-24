@@ -369,15 +369,15 @@ public class EnemyAI : MonoBehaviour
 			                    <div class="video-container">
 								<span class="logo"><video controls="" src="images/A Keen Eye Video.mp4" alt=""></span>
 								</div>
-			                    <h3>Project Overview</h3>
+			                    <h2>Project Overview</h2>
 								<p>A keen eye is an isometric/top-down puzzle game where you have to find the odd object out in a sea of them, whilst having intentionally limited controls.
 								I made this in 9 weeks during one of the last modules in my 1st year at University, where my main focus was trying to keep the scope as low as I could since this was my first time
 								using Unreal's Blueprints without any assistance. </p>
-			                    <h3>Development Challenges</h3>
+			                    <h2>Development Challenges</h2>
 								<p>One of the biggest struggles I had was with the green outline for showing the player what object you are currently looking at, where, if you looked at two objects in quick succession,
 								it would highlight both objects rather than the latest one. This stumped me for quite a while until I finally resolved it by keeping track of what the last object you looked at was, 
 								and checking every 0.25ish seconds if the object you're looking at is the same, and if it isn't, disable the outline on the last object so only the current object has it.</p>
-			                    <h3>Technical Discussion</h3>
+			                    <h2>Technical Discussion</h2>
 								<p>From a technical standpoint, I do feel the game is really basic, and didn't really push me outside any real comfort zones, but it still felt well-scoped and reached where it
 								needed to be for the deadline despite the hiccups. From a game design perspective, I feel like there isn't much to expand upon in terms of gameplay, my choice for such simple and limiting controls
 								was a double-edged sword, where it meant that it was relatively easy to figure out the controls, but where it goes beyond that isn't clear. It also doesn't give the player much freedom
@@ -393,14 +393,14 @@ public class EnemyAI : MonoBehaviour
 			                    <div class="video-container">
 								<span class="logo"><video controls="" src="images/Arena Video True.mp4" alt=""></span>
 								</div>
-			                    <p>Project Overview</p>
+			                    <h2>Project Overview</h2>
 								<p>The Arena Movement Tool was a tool I made to assist with creating arena-based movement for bosses, whilst also creating a camera tracking and orbiting system in the process, without realising.
 								I made this in 9 weeks for my Tools Development Module in my 2nd year of University, where I gave myself the challenge of doing everything in C++, with the only semblance of Blueprint
 								usage being the component itself.</p>
-			                    <p>Development Challenges</p>
+			                    <h2>Development Challenges</h2>
 								<p>The biggest struggle I had for this project was the main orbit behaviour, as I tried looking into physics and circular motion to make it behave like the orbit of a planet or satellite,
 								despite the fact that I had no experience with A-Level physics. Instead, I pivoted to making it move in 360 intervals, mimicking the orbiting behaviour whilst not needing any of that advanced physics.</p>
-			                    <p>Technical Discussion</p>
+			                    <h2>Technical Discussion</h2>
 								<p>From a technical standpoint, it is a very simple tool. I once again tried to keep the scope low and not do anything too complicated to reach completion in that 9-week timeframe.
 								When I reached the end and started bug testing it, I was pleasantly surprised to find uses for the tool I had not realised before, such as easy object tracking for the camera to use.
 								I also struggled to find any bugs when doing the testing, except for null ptrs, which were easily fixed with a check for if the object assigned was null, and only allowing the behaviour
