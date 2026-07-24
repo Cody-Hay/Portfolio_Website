@@ -368,6 +368,61 @@ public class EnemyAI : MonoBehaviour
 								When I reached the end and started bug testing it, I was pleasantly surprised to find uses for the tool I had not realised before, such as easy object tracking for the camera to use.
 								I also struggled to find any bugs when doing the testing, except for null ptrs, which were easily fixed with a check for if the object assigned was null, and only allowing the behaviour
 								to work if it wasn't.</p>
+			<p>Code Snippets:</p>
+			<pre>
+				<code>
+	//Behaviour for looking at a specific object assigned by the user
+	if (IsLookAt)
+	{
+
+		if (ObjectToLookAt != nullptr)
+		{
+			//Checks where Assigned object is
+			FVector LookAtVector = ObjectToLookAt->GetActorLocation();
+
+			//Gets location of component parent
+			FVector ThisVector = ParentActor->GetActorLocation();
+
+			//Sets parent rotation to always look at assigned object
+			ParentActor->SetActorRotation(UKismetMathLibrary::FindLookAtRotation(ThisVector, LookAtVector));
+
+			//UE_LOG(LogTemp, Log ,TEXT("ParentActor: %s"), *ParentActor->GetActorRotation().ToString());
+		}
+		else
+		{
+			return;
+		}
+	}
+				</code>
+			</pre>
+			<pre>
+				<code>
+	    //Gets location of component parent
+      	FVector ThisVector = ParentActor->GetActorLocation();
+
+      	FVector OrbitingVector = OrbitingPoint->GetActorLocation();
+		
+
+      	FVector Radius = FVector(1, 0, 0)*OrbitingRadius;
+		
+		//Keeps rate of orbit consistent 
+      	CurrentOrbitPosition += (OrbitingSpeed*DeltaTime);
+
+      	//Allows continuous movement
+      	if (CurrentOrbitPosition >360.0f)
+      	{
+      		CurrentOrbitPosition = 1;
+      	}
+		
+      	FVector OrbitForce = Radius.RotateAngleAxis(CurrentOrbitPosition, FVector(0.0f, 0.0f, 1.0f));
+
+      	OrbitingVector.X += OrbitForce.X;
+      	OrbitingVector.Y += OrbitForce.Y;
+      	OrbitingVector.Z += OrbitForce.Z;
+		
+      	ParentActor->SetActorLocation(OrbitingVector);
+				</code>
+			</pre>
 							</section>
 
 					</div>
